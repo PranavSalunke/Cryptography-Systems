@@ -1,22 +1,47 @@
 # Pranav Salunke
 from fractions import gcd as fgcd
+import argparse
 
 
-def findGCD(num1, num2):
+# set up argparse
+parser = argparse.ArgumentParser(description='Program to find the GCD and/or linear combination of two integers using the euclidean algorithm')
+
+parser.add_argument("-f", '--function',
+                    choices=["gcd", "lincomb", "both"],
+                    default="both",
+                    help="If you want the GCD of the two integers or the linear combination or both. Choices: \"gcd\", \"lincomb\" \"both\" (default) ")
+parser.add_argument('-showGcdWork',
+                    action='store_true',
+                    help="Include this flag to show the work in finding the GCD."
+                    )
+parser.add_argument("number1",
+                    type=int,
+                    help="The first number")
+parser.add_argument("number2",
+                    type=int,
+                    help="The second number")
+
+args = parser.parse_args()
+
+
+def findGCD(num1, num2, showGcdWork, findingLC=False):
     a = max(num1, num2)
     b = min(num1, num2)
-    print("Finding gcd(%d,%d):\n" % (a, b))
+    if not findingLC:
+        print("Finding gcd(%d,%d):" % (a, b))
 
-    r = None
-    gcdanswer = None
+    r = a % b  # check if it is 0 (if a is multiple of b)
     q = None
+    gcdanswer = b  # if a is multiple of b, b (the smaller number) will the the gcd
+    # if not, it will be set to the right value in the loop
 
     while r != 0:
         gcdanswer = r
         r = a % b
         temp = a - r
         q = temp / b
-        print("%d = %d * %d + %d" % (a, q, b, r))
+        if(showGcdWork):
+            print("%d = %d * %d + %d" % (a, q, b, r))
 
         a = b
         b = r
@@ -64,53 +89,21 @@ def linearCombination(num1, num2):
 
 
 # the functions check which is larger and set a and b accordingly
-# for question 1
-num1 = 2458437443
-num2 = 903827662
 
-gcd = findGCD(num1, num2)
-print("\nGCD: %d" % (gcd))
+# num1 = 2458437443
+# num2 = 903827662
 
-a, b, u, v = linearCombination(num1, num2)
-print("Linear Combination: %d = %d*%d + %d*%d" % (gcd, u, a, v, b))
+function = args.function
+showGcdWork = args.showGcdWork
+num1 = args.number1
+num2 = args.number2
 
+if function == "gcd" or function == "both":
+    gcd = findGCD(num1, num2, showGcdWork)
+    print("Result-- GCD: %d" % (gcd))
 
-# extra examples
-print("-------------")
-
-# from lecture
-num1 = 1001
-num2 = 1339
-
-gcd = findGCD(num1, num2)
-print("\nGCD: %d" % (gcd))
-
-a, b, u, v = linearCombination(num1, num2)
-print("Linear Combination: %d = %d*%d + %d*%d" % (gcd, u, a, v, b))
-
-print("-------------")
-
-num1 = 97564
-num2 = 84
-
-gcd = findGCD(num1, num2)
-print("\nGCD: %d" % (gcd))
-
-a, b, u, v = linearCombination(num1, num2)
-print("Linear Combination: %d = %d*%d + %d*%d" % (gcd, u, a, v, b))
-
-print("-------------")
-
-num1 = 5690
-num2 = 12001
-
-gcd = findGCD(num1, num2)
-print("\nGCD: %d" % (gcd))
-
-a, b, u, v = linearCombination(num1, num2)
-print("Linear Combination: %d = %d*%d + %d*%d" % (gcd, u, a, v, b))
-
-
-for i in range(1, 32):
-    g = fgcd(i, 30)
-    print(str(i) + " -- " + str(g))
+if function == "lincomb" or function == "both":
+    print()
+    a, b, u, v = linearCombination(num1, num2)
+    gcd = findGCD(num1, num2, showGcdWork=False, findingLC=True)
+    print("Result-- Linear Combination: %d = %d*%d + %d*%d" % (gcd, u, a, v, b))
