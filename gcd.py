@@ -24,11 +24,10 @@ parser.add_argument("number2",
 args = parser.parse_args()
 
 
-def findGCD(num1, num2, showGcdWork, findingLC=False):
+def findGCD(num1, num2, showGcdWork):
     a = max(num1, num2)
     b = min(num1, num2)
-    if not findingLC:
-        print("Finding gcd(%d,%d):" % (a, b))
+    print("Finding gcd(%d,%d):" % (a, b))
 
     r = a % b  # check if it is 0 (if a is multiple of b)
     q = None
@@ -78,16 +77,17 @@ def linearCombination(num1, num2):
         temp = a - r
         q_i = temp / b
         a = b
-        b = r
+        if r != 0:  # last b value is the gcd
+            b = r
         if i >= 2 and r != 0:
             u = uDict[str(i - 2)] - q_i * uDict[str(i - 1)]
             v = vDict[str(i - 2)] - q_i * vDict[str(i - 1)]
             uDict[str(i)] = u
             vDict[str(i)] = v
 
-    u = uDict[str(i-1)]  # not entirely sure why i-1, but I think we don't count the one where r = 0
-    v = vDict[str(i-1)]
-    return origA, origB, u, v
+    u = int(uDict[str(i-1)])  # not entirely sure why i-1, but I think we don't count the one where r = 0
+    v = int(vDict[str(i-1)])
+    return b, origA, origB, u, v,
 
 
 # the functions check which is larger and set a and b accordingly
@@ -106,6 +106,5 @@ if function == "gcd" or function == "both":
 
 if function == "lincomb" or function == "both":
     print()
-    a, b, u, v = linearCombination(num1, num2)
-    gcd = findGCD(num1, num2, showGcdWork=False, findingLC=True)
+    gcd, a, b, u, v = linearCombination(num1, num2)
     print("  Result-- Linear Combination: %d = %d*%d + %d*%d" % (gcd, u, a, v, b))
