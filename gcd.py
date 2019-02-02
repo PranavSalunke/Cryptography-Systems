@@ -51,8 +51,10 @@ def findGCD(num1, num2, showGcdWork, findingLC=False):
 
 def linearCombination(num1, num2):
     a = max(num1, num2)
+    origA = a
     b = min(num1, num2)
-    print("Finding Linear Combination(%d,%d):" % (a, b))
+    origB = b
+    print("Finding LinearCombination(%d,%d):" % (a, b))
 
     r = None
     q_i = None
@@ -66,7 +68,7 @@ def linearCombination(num1, num2):
     uDict["0"] = 0
     uDict["1"] = 1
     vDict["0"] = 1
-    vDict["1"] = -1 * (a / b)  # -q_1 using integer division
+    vDict["1"] = -1 * (a // b)  # -q_1 using integer division
 
     while r != 0:
         i = i + 1
@@ -83,9 +85,9 @@ def linearCombination(num1, num2):
             uDict[str(i)] = u
             vDict[str(i)] = v
 
-    a = max(num1, num2)
-    b = min(num1, num2)
-    return a, b, u, v
+    u = uDict[str(i-1)]  # not entirely sure why i-1, but I think we don't count the one where r = 0
+    v = vDict[str(i-1)]
+    return origA, origB, u, v
 
 
 # the functions check which is larger and set a and b accordingly
@@ -100,10 +102,10 @@ num2 = args.number2
 
 if function == "gcd" or function == "both":
     gcd = findGCD(num1, num2, showGcdWork)
-    print("Result-- GCD: %d" % (gcd))
+    print("  Result-- GCD: %d" % (gcd))
 
 if function == "lincomb" or function == "both":
     print()
     a, b, u, v = linearCombination(num1, num2)
     gcd = findGCD(num1, num2, showGcdWork=False, findingLC=True)
-    print("Result-- Linear Combination: %d = %d*%d + %d*%d" % (gcd, u, a, v, b))
+    print("  Result-- Linear Combination: %d = %d*%d + %d*%d" % (gcd, u, a, v, b))
