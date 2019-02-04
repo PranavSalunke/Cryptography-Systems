@@ -39,7 +39,8 @@ def findGCD(num1, num2, showGcdWork=False):
 
     a = max(num1, num2)
     b = min(num1, num2)
-    print("Finding gcd(%d,%d):" % (a, b))
+    if __name__ == "__main__":
+        print("Finding gcd(%d,%d):" % (a, b))
 
     r = a % b  # check if it is 0 (if a is multiple of b)
     q = None
@@ -70,7 +71,8 @@ def linearCombination(num1, num2):
     origA = a
     b = min(num1, num2)
     origB = b
-    print("Finding LinearCombination(%d,%d):" % (a, b))
+    if __name__ == "__main__":
+        print("Finding LinearCombination(%d,%d):" % (a, b))
 
     r = None
     q_i = None
