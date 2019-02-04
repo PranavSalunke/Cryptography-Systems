@@ -11,6 +11,8 @@ That said, this is not intended for copying for any other course. Plus, other co
 If another student comes across this, I would highly recommend trying to implement these systems on your own.
 It's very satisfying once you get it! 
 
+I hard coded everything I needed for class, but I have changed it so that they can be used by the public through
+command line arguments or imported into your own programs (essentially making this into a pseudolibrary of sorts)! 
 
 ## Contents
 - [Crypto Systems in this folder](#crypto-Systems-in-this-folder)
@@ -19,7 +21,7 @@ It's very satisfying once you get it!
 
 ## Crypto Systems in this folder
 - GCD/Linear Combination (not really a crypto system)
-    - gcd.py
+    - gcdLC.py
 - Affine
     - affine.py
 - Affine Matrix
@@ -51,13 +53,14 @@ The calculation for the GCD is done using the [Euclidean Algorithm](https://en.w
 These programs are created for Python 3 and are intended to be used via the command line
 You may me able to run python 3 with the command `python3` or `py -3` on Windows. I will use `py -3` in the examples.
 To download Python and view its documentation, refer to [Python's Official Site](https://www.python.org/)
-Each of the systems are self contained in their files and have various arguments. The details for these are as follows. 
+Each of the systems are self contained in their files and have various arguments. The details for these are below. 
 
+Additionally, any of these can be imported with the `import` keyword. The internal functions can be use in your own scripts.
 ### GCD/Linear Combination 
 This program will give you the Greatest Common Divisor (GCD) or the Linear Combination or both of two numbers  (num1 and num2
-Help message (`py -3 .\gcd.py -h`):
+Help message (`py -3 .\gcdLC.py -h`):
 ```
-usage: gcd.py [-h] [-f {gcd,lincomb,both}] [-showGcdWork] number1 number2
+usage: gcdLC.py [-h] [-f {gcd,lincomb,both}] [-showGcdWork] number1 number2
 
 Program to find the GCD and/or linear combination of two integers using the
 euclidean algorithm
@@ -77,13 +80,13 @@ optional arguments:
 
 Examples:
 Just two numbers. This will return the GCD and the Linear Combination of the two numbers
-    `py -3 .\gcd.py 432 32`
+    `py -3 .\gcdLC.py 432 32`
 
 This will return just the GCD of the two numbers. Not specifying any option with the `-f` option will default to the `both` option.
-    `py -3 .\gcd.py -f gcd 24425 125`
+    `py -3 .\gcdLC.py -f gcd 24425 125`
 
 This will show the work to calculate the GCD
-    `py -3 .\gcd.py -showGcdWork  223 2353`
+    `py -3 .\gcdLC.py -showGcdWork  223 2353`
 ### Affine
 
 ### Affine Matrix

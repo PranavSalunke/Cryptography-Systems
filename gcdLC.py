@@ -27,7 +27,14 @@ def setArgParse():
     return args
 
 
-def findGCD(num1, num2, showGcdWork):
+def findGCD(num1, num2, showGcdWork=False):
+    if not isinstance(num1, int):
+        raise TypeError("findGCD - num1 must be an integer. Was %s" % (str(type(num1))))
+    if not isinstance(num2, int):
+        raise TypeError("findGCD - num2 must be an integer. Was %s" % (str(type(num2))))
+    if not isinstance(showGcdWork, bool):
+        raise TypeError("findGCD - showGcdWork must be a boolean. Was %s" % (str(type(showGcdWork))))
+
     a = max(num1, num2)
     b = min(num1, num2)
     print("Finding gcd(%d,%d):" % (a, b))
@@ -52,6 +59,11 @@ def findGCD(num1, num2, showGcdWork):
 
 
 def linearCombination(num1, num2):
+    if not isinstance(num1, int):
+        raise TypeError("linearCombination - num1 must be an integer. Was %s" % (str(type(num1))))
+    if not isinstance(num2, int):
+        raise TypeError("linearCombination - num2 must be an integer. Was %s" % (str(type(num2))))
+
     a = max(num1, num2)
     origA = a
     b = min(num1, num2)
@@ -93,24 +105,26 @@ def linearCombination(num1, num2):
     return b, origA, origB, u, v,
 
 
-# the functions check which is larger and set a and b accordingly
-
-
 def main():
+    if __name__ != "__main__":
+        raise UserWarning("main() should not be called from a script when gcdLC.py is imported. Use findGCD and linearCombination directly.")
+
     args = setArgParse()
     function = args.function
     showGcdWork = args.showGcdWork
     num1 = args.number1
     num2 = args.number2
-
+    # the findGCD and linearCombination check which argument is larger and set a and b accordingly
     if function == "gcd" or function == "both":
         gcd = findGCD(num1, num2, showGcdWork)
         print("  Result-- GCD: %d" % (gcd))
 
     if function == "lincomb" or function == "both":
-        print()
+        if function == "both":
+            print()
         gcd, a, b, u, v = linearCombination(num1, num2)
         print("  Result-- Linear Combination: %d = %d*%d + %d*%d" % (gcd, u, a, v, b))
 
 
-main()
+if __name__ == "__main__":  # true if run directly via the command line
+    main()
