@@ -21,7 +21,8 @@ I hope you have as much fun playing with this as much as I had making these!
 ## Contents
 - [Crypto Systems in this folder](#crypto-Systems-in-this-folder)
 - [Crypto System Descriptions](#crypto-system-description)
-- [Usage/Documentation](#usage)
+- [Usage for command line](#usage-for-command-line)
+- [Documentation for use in external programs](#documentation-for-use-in-external-programs)
 
 ## Crypto Systems in this folder
 - GCD/Linear Combination (not really a crypto system)
@@ -35,7 +36,7 @@ I hope you have as much fun playing with this as much as I had making these!
 - RSA
     - RSA.py
 
-## Crypto System Description
+## Crypto System description
 This section will discuss the general idea about how the particular crypto system works
 
 ### GCD/Linear Combination 
@@ -53,7 +54,7 @@ The calculation for the GCD is done using the [Euclidean Algorithm](https://en.w
 
 ### RSA
 
-## Usage/Documentation
+## Usage for command line
 These programs are created for Python 3 and are intended to be used via the command line
 You may me able to run python 3 with the command `python3` or `py -3` on Windows. I will use `py -3` in the examples.
 To download Python and view its documentation, refer to [Python's Official Site](https://www.python.org/)
@@ -99,3 +100,70 @@ This will show the work to calculate the GCD
 
 ### RSA
 
+
+## Documentation for use in external programs
+
+All the files have been created to be used in the command line by the above usage or to be imported into your own programs.
+Just import the file (the file must be in the same folder) at the top of your python file. For example `import gcdLc`.
+Now you have access to the programs methods. Any methods that should not be used throw errors. 
+
+Below are the methods that are accessible, their arguments, what they do, and their return values.
+
+### GCD/Linear Combination 
+```
+gcdLC.py
+```
+
+```
+findGCD(num1, num2, showGcdWork=False)
+```
+Takes two integers and returns their Greatest Common Divisor (GCD).
+`num1` first integer
+`num2` second integer
+`showGcdWork` To show the work for finding the GCD or not. If true, prints out to standard output. Default is False.
+
+Example:
+
+```
+>>> import gcdLC
+>>> x = gcdLC.findGCD(15,100,True)
+100 = 6 * 15 + 10
+15 = 1 * 10 + 5
+10 = 2 * 5 + 0
+>>> x
+5
+>>> y = gcdLC.findGCD(15,100) #usually what you would want to do
+>>> y
+5
+```
+
+```
+linearCombination(num1, num2)
+```
+Takes two integers and finds their linear combination.
+`num1` first integer
+`num2` second integer
+
+note: `a` is the larger of num1, num2
+returns the tuple (gcd, a, b, u, v,)
+
+`u` and `v` as such that
+`gcd = u*a + v*b`
+
+Example
+
+```
+>>> y = gcdLC.linearCombination(15,100)
+>>> y
+(5, 100, 15, -1, 7)
+>>> 100*-1 + 7*15
+5
+```
+
+### Affine
+
+### Affine Matrix
+
+### Knapsack
+
+### RSA
