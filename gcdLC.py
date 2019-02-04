@@ -5,6 +5,9 @@ import argparse
 
 # set up argparse
 def setArgParse():
+    if __name__ != "__main__":
+        raise UserWarning("setArgParse() should not be called from a script when gcdLC.py is imported. Use findGCD and linearCombination directly.")
+
     parser = argparse.ArgumentParser(description='Program to find the GCD and/or linear combination of two integers using the euclidean algorithm')
 
     parser.add_argument("-f", '--function',
