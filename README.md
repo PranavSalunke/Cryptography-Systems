@@ -11,8 +11,12 @@ That said, this is not intended for copying for any other course. Plus, other co
 If another student comes across this, I would highly recommend trying to implement these systems on your own.
 It's very satisfying once you get it! 
 
-I hard coded everything I needed for class, but I have changed it so that they can be used by the public through
-command line arguments or imported into your own programs (essentially making this into a pseudolibrary of sorts)! 
+I hard coded everything I needed for class, but I wanted to share this with the public. I found these programs really cool and fun!
+So for it to be more useful, I have changed it so that they can be used by the public (you!) through command line arguments or imported into your own programs (essentially making this into a pseudo-library of sorts)! 
+
+All the details of each crypto system, the usage for my programs, and other info can be found below.
+
+I hope you have as much fun playing with this as much as I had making these!
 
 ## Contents
 - [Crypto Systems in this folder](#crypto-Systems-in-this-folder)
