@@ -106,7 +106,8 @@ def linearCombination(num1, num2):
 
     u = int(uDict[str(i-1)])  # not entirely sure why i-1, but I think we don't count the one where r = 0
     v = int(vDict[str(i-1)])
-    return b, origA, origB, u, v,
+    gcd = b
+    return gcd, origA, origB, u, v,
 
 
 def main():
