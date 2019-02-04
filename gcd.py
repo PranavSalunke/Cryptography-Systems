@@ -4,24 +4,27 @@ import argparse
 
 
 # set up argparse
-parser = argparse.ArgumentParser(description='Program to find the GCD and/or linear combination of two integers using the euclidean algorithm')
+def setArgParse():
+    parser = argparse.ArgumentParser(description='Program to find the GCD and/or linear combination of two integers using the euclidean algorithm')
 
-parser.add_argument("-f", '--function',
-                    choices=["gcd", "lincomb", "both"],
-                    default="both",
-                    help="If you want the GCD of the two integers or the linear combination or both. Choices: \"gcd\", \"lincomb\" \"both\" (default) ")
-parser.add_argument('-showGcdWork',
-                    action='store_true',
-                    help="Include this flag to show the work in finding the GCD."
-                    )
-parser.add_argument("number1",
-                    type=int,
-                    help="The first number")
-parser.add_argument("number2",
-                    type=int,
-                    help="The second number")
+    parser.add_argument("-f", '--function',
+                        choices=["gcd", "lincomb", "both"],
+                        default="both",
+                        help="If you want the GCD of the two integers or the linear combination or both. Choices: \"gcd\", \"lincomb\" \"both\" (default) ")
+    parser.add_argument('-showGcdWork',
+                        action='store_true',
+                        help="Include this flag to show the work in finding the GCD."
+                        )
+    parser.add_argument("number1",
+                        type=int,
+                        help="The first number")
+    parser.add_argument("number2",
+                        type=int,
+                        help="The second number")
 
-args = parser.parse_args()
+    args = parser.parse_args()
+
+    return args
 
 
 def findGCD(num1, num2, showGcdWork):
@@ -92,19 +95,22 @@ def linearCombination(num1, num2):
 
 # the functions check which is larger and set a and b accordingly
 
-# num1 = 2458437443
-# num2 = 903827662
 
-function = args.function
-showGcdWork = args.showGcdWork
-num1 = args.number1
-num2 = args.number2
+def main():
+    args = setArgParse()
+    function = args.function
+    showGcdWork = args.showGcdWork
+    num1 = args.number1
+    num2 = args.number2
 
-if function == "gcd" or function == "both":
-    gcd = findGCD(num1, num2, showGcdWork)
-    print("  Result-- GCD: %d" % (gcd))
+    if function == "gcd" or function == "both":
+        gcd = findGCD(num1, num2, showGcdWork)
+        print("  Result-- GCD: %d" % (gcd))
 
-if function == "lincomb" or function == "both":
-    print()
-    gcd, a, b, u, v = linearCombination(num1, num2)
-    print("  Result-- Linear Combination: %d = %d*%d + %d*%d" % (gcd, u, a, v, b))
+    if function == "lincomb" or function == "both":
+        print()
+        gcd, a, b, u, v = linearCombination(num1, num2)
+        print("  Result-- Linear Combination: %d = %d*%d + %d*%d" % (gcd, u, a, v, b))
+
+
+main()

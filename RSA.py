@@ -1,4 +1,4 @@
-# COPYRIGHT PRANAV SALUNKE 2018 UNTIL FOREVER
+# Pranav Salunke
 
 
 def letterToNumber(alphabet, letter):
