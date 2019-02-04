@@ -1,5 +1,4 @@
 # Pranav Salunke
-from fractions import gcd as fgcd
 import argparse
 
 
