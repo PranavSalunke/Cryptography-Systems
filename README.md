@@ -23,6 +23,7 @@ I hope you have as much fun playing with this as much as I had making these!
 - [Crypto System Descriptions](#crypto-system-description)
 - [Usage for command line](#usage-for-command-line)
 - [Documentation for use in external programs](#documentation-for-use-in-external-programs)
+- [The Example Program](#the-example-program)
 
 ## Crypto Systems in this folder
 - GCD/Linear Combination (not really a crypto system)
@@ -167,3 +168,10 @@ Example
 ### Knapsack
 
 ### RSA
+
+## The Example Program
+I created an example program `exampleProgram.py` showcasing how these crypto systems can be used in your own programs! 
+Just run it in the command line with python 3 `py -3 exampleProgram.py` or `python3 exampleProgram.py`.
+The output will be printed out to the console. 
+
+If you like, take a look at how it works and play around with it! 
