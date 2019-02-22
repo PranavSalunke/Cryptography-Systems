@@ -65,6 +65,8 @@ def affineDecode(alphabet, key, encryptedtext):
 
 
 def numbersToLetters(alphabet, numberEncoding):
+    # for when encoded string is given as numbers instead of letters
+    # for example: "0 15 21" instad of "APV" when alphabet is "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
     letters = ""
     numberEncodingList = numberEncoding.split(" ")
     for n in numberEncodingList:
@@ -73,12 +75,13 @@ def numbersToLetters(alphabet, numberEncoding):
     return letters
 
 
-def frequencyAnalysis(alphabet, string, humanAssist=False):
+def getFrequencyAnalysis(alphabet, string):
+    # returns list of tuples for every letter in alphabet
+    # tuple: (N,L) where N is the frequency of letter L in the string
     string = string.upper()
     alphabet = alphabet.upper()
     frequencyDict = {}
     frequencyList = []
-    frequencyListLetters = []
     for a in alphabet:
         frequencyDict[str(a)] = 0
 
@@ -89,9 +92,17 @@ def frequencyAnalysis(alphabet, string, humanAssist=False):
         frequencyList.append((freq, letters))
 
     frequencyList.sort(reverse=True)
+    # print(frequencyList)
+    return frequencyList
 
+
+def joinLetterFreqency(frequencyList):
+    # returns list of lists
+    # inside list is a list of letters with the same freqency/ groups letters with same freqency
+    # frequencyList is retrieved from getFrequencyAnalysis
     p1 = 0
     p2 = 0
+    frequencyListLetters = []
     while(p2 < len(frequencyList) and p1 < len(frequencyList)):
         sublist = []
         n1, l1 = frequencyList[p1]
@@ -104,6 +115,16 @@ def frequencyAnalysis(alphabet, string, humanAssist=False):
 
         p1 = p2
         frequencyListLetters.append(sublist)
+
+    return frequencyListLetters
+
+
+def frequencyAnalysisCrack(alphabet, string, humanAssist=False):
+    # attempts to crack the code using frequency analysis.
+    # gets the frequency analysis of the given string and then
+    frequencyList = getFrequencyAnalysis(alphabet, string)
+
+    frequencyListLetters = joinLetterFreqency(frequencyList)
 
     s = ""
     if humanAssist:
@@ -167,9 +188,11 @@ def replaceUsingFreq(alphabet, knownAplhFreq, encodedFreq, encodedString):
 
 
 def bruteForceCrack(alphabet, encodedString):
+    # tries all possible key values
+    # prints out the attempted key pair and the corresponding decoded string
     z = len(alphabet)
     for a in range(1, z + 1):  # z+1 because range(a,b) goes from a to b-1
-        if(gcd(a, z) == 1):
+        if(gcdLC.findGCD(a, z) == 1):
             # print(str(a) + " " + str(linearCombination(a, 27)))
             for b in range(1, z + 1):
                 d = affineDecode(alphabet, (a, b), encodedString)
@@ -197,8 +220,13 @@ key = (11, 25)  # a,b
 # bruteForceCrack(alphabet, asLetters)
 message = "I JUST FINISHED MY LAST CRYPTO HW!!"
 e = affineEncode(alphabet, (16, 31), message)
-print(e)
-d = affineDecode(alphabet, (16, 31), e)
-print(d)
-print(affineDecode(alphabet, (26, 28), "BUVCFIWOUJTZ!H"))
+# print(e)
+# d = affineDecode(alphabet, (16, 31), e)
+# print(d)
+# print(affineDecode(alphabet, (26, 28), "BUVCFIWOUJTZ!H"))
 # print(affineDecode(alphabet, (16, 4), "WYVLOOXPPLIYGLKPMXO"))
+
+print(frequencyAnalysisCrack(alphabet, e))
+f = getFrequencyAnalysis(alphabet, e)
+print(f)
+print(joinLetterFreqency(f))
