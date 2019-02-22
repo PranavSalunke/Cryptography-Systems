@@ -1,32 +1,38 @@
-from fractions import gcd
+# Pranav Salunke
+import gcdLC  # import my own program
 
 
 def bruteForceInverse(a, m):
-    for i in range(1, m):
+
+    if gcdLC.findGCD(a, m) != 1:
+        return None
+
+    if m == 1:
+        return 0
+        # we know gcd = 1 and the linear combination is gcd = a*u + m*v
+        # so with m=1 we have 1 = a*0 + 1*1
+
+    for i in range(0, m):
         if (a * i) % m == 1:
             return i
     return None
 
 
-def findInverse(a, m):
-    # does not work yet, only got it to get the gcd.
-    # not sure how to do rest of the extended Euclid algo. yet
-    # using brute force above for now
-    multInv = 0
-    oldM = m
-    oldA = a
-    m = max(oldA, oldM)
-    a = min(oldA, oldM)
+def modInverse(a, m):
 
-    q = m // a
-    r = m % a
-    gcdval = a
-    while r != 0:
-        gcdval = r
-        m = a
-        a = r
-        r = m % a
-        q = m // a
+    # remember linearCombination swaps a and m if a is smaller than m
+    # in linearCombination a > m even if not inputted that way
+    # so keep track of what linearCombination returns as a and m
+
+    gcd, returnedA, returnedM, u, v = gcdLC.linearCombination(a, m)
+
+    if gcd != 1:
+        return None
+
+    if returnedA == a:
+        return u % m
+    else:
+        return v % m
 
 
 def affineEncode(alphabet, key, plaintext):
