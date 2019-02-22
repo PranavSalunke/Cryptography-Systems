@@ -54,7 +54,7 @@ def affineDecode(alphabet, key, encryptedtext):
     a, b = key
     z = len(alphabet)
 
-    inverse = bruteForceInverse(a, z)
+    inverse = modInverse(a, z)
     decoded = ""
     for e in encryptedtext:
         cipherLetterKey = alphabet.find(e)
@@ -202,6 +202,3 @@ d = affineDecode(alphabet, (16, 31), e)
 print(d)
 print(affineDecode(alphabet, (26, 28), "BUVCFIWOUJTZ!H"))
 # print(affineDecode(alphabet, (16, 4), "WYVLOOXPPLIYGLKPMXO"))
-
-# findInverse(23, 30)
-# print(bruteForceInverse(1341, 134234))
