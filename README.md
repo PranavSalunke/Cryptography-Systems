@@ -19,15 +19,15 @@ All the details of each crypto system, the usage for my programs, and other info
 I hope you have as much fun playing with this as much as I had making these!
 
 ## Contents
-- [Crypto Systems in this folder](#crypto-Systems-in-this-folder)
+- [Crypto Systems in this folder](#crypto-systems-in-this-folder)
+- [Other Programs in this folder](#other-programs-in-this-folder)
 - [Crypto System Descriptions](#crypto-system-description)
+- [Other Program Descriptions](#other-program-description)
 - [Usage for command line](#usage-for-command-line)
 - [Documentation for use in external programs](#documentation-for-use-in-external-programs)
 - [The Example Program](#the-example-program)
 
 ## Crypto Systems in this folder
-- GCD/Linear Combination (not really a crypto system)
-    - gcdLC.py
 - Affine
     - affine.py
 - Affine Matrix
@@ -37,15 +37,16 @@ I hope you have as much fun playing with this as much as I had making these!
 - RSA
     - RSA.py
 
+## Other Programs in this folder
+- GCD/Linear Combination
+    - gcdLC.py
+- Frequency Analysis
+    - frequencyAnalysis.py
+- Miscellaneous Tools
+    - miscTools.py
+
 ## Crypto System description
 This section will discuss the general idea about how the particular crypto system works
-
-### GCD/Linear Combination 
-The GCD is the largest number that evenly divides both numbers.
-The Linear Combination is the values *u* and *v* such that GCD = u\*num1 + v\*num2
-
-
-The calculation for the GCD is done using the [Euclidean Algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm). And the Linear Combination is found using the [Extended Algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm#Extended_Euclidean_algorithm). 
 
 ### Affine
 
@@ -55,6 +56,19 @@ The calculation for the GCD is done using the [Euclidean Algorithm](https://en.w
 
 ### RSA
 
+## Other Program description
+
+### GCD/Linear Combination 
+The GCD is the largest number that evenly divides both numbers.
+The Linear Combination is the values *u* and *v* such that GCD = u\*num1 + v\*num2
+
+
+The calculation for the GCD is done using the [Euclidean Algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm). And the Linear Combination is found using the [Extended Algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm#Extended_Euclidean_algorithm). 
+
+### Frequency Analysis
+
+### Miscellaneous Tools
+
 ## Usage for command line
 These programs are created for Python 3 and are intended to be used via the command line
 You may me able to run python 3 with the command `python3` or `py -3` on Windows. I will use `py -3` in the examples.
@@ -62,6 +76,15 @@ To download Python and view its documentation, refer to [Python's Official Site]
 Each of the systems are self contained in their files and have various arguments. The details for these are below. 
 
 Additionally, any of these can be imported with the `import` keyword. The internal functions can be use in your own scripts.
+
+### Affine
+
+### Affine Matrix
+
+### Knapsack
+
+### RSA
+
 ### GCD/Linear Combination 
 This program will give you the Greatest Common Divisor (GCD) or the Linear Combination or both of two numbers  (num1 and num2
 Help message (`py -3 .\gcdLC.py -h`):
@@ -93,14 +116,10 @@ This will return just the GCD of the two numbers. Not specifying any option with
 
 This will show the work to calculate the GCD
     `py -3 .\gcdLC.py -showGcdWork  223 2353`
-### Affine
 
-### Affine Matrix
+### Frequency Analysis
 
-### Knapsack
-
-### RSA
-
+### Miscellaneous Tools
 
 ## Documentation for use in external programs
 
@@ -109,6 +128,14 @@ Just import the file (the file must be in the same folder) at the top of your py
 Now you have access to the programs methods. Any methods that should not be used throw errors. 
 
 Below are the methods that are accessible, their arguments, what they do, and their return values.
+
+### Affine
+
+### Affine Matrix
+
+### Knapsack
+
+### RSA
 
 ### GCD/Linear Combination 
 ```
@@ -161,13 +188,9 @@ Example
 5
 ```
 
-### Affine
+### Frequency Analysis
 
-### Affine Matrix
-
-### Knapsack
-
-### RSA
+### Miscellaneous Tools
 
 ## The Example Program
 I created an example program `exampleProgram.py` showcasing how these crypto systems can be used in your own programs! 
