@@ -68,9 +68,9 @@ The calculation for the GCD is done using the [Euclidean Algorithm](https://en.w
 
 ### Frequency Analysis
 Frequency Analysis is the method of analyzing a encoded message with the frequency of the appearance of letters. 
-Every language uses certain letters over others. The ordering for English letters can be found [here](https://en.wikipedia.org/w/index.php?title=Letter_frequency#Relative_frequencies_of_letters_in_the_English_language). It starts with ` ETAO..`.
+Every language uses certain letters over others. The ordering for English letters can be found [here](https://en.wikipedia.org/w/index.php?title=Letter_frequency#Relative_frequencies_of_letters_in_the_English_language). It starts with `_ETAO..` where `_` is actually a space.
 
-The idea is that in a substitution cypher such as the affine system, the distribution of letters should be the same. So if it is found that `G` is used the most often, it is most likely a space ` ` and if `M` comes up the second most, it is probably an `E`. This goes on until everything is re-substituted. Usually this does not reveal the entire message, but it can help when trying to crack it. 
+The idea is that in a substitution cypher such as the affine system, the distribution of letters should be the same. So if it is found that `G` is used the most often, it is most likely a space and if `M` comes up the second most, it is probably an `E`. This goes on until everything is re-substituted. Usually this does not reveal the entire message, but it can help when trying to crack it. 
 
 One large set back is there are letters with the same frequency. For instance if `M` and `E` both appeared the most often, we wouldn't know which one to replace with a space. It comes down to guesswork again. In the program I wrote, there is a mode called `humanAssist` when setting the order in which letters appear in the message. More information about it will be in the [Usage for command line](#usage-for-command-line) section below.
 
