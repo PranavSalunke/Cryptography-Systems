@@ -3,6 +3,10 @@ import gcdLC
 
 
 def bruteForceModInverse(a, m):
+    if not isinstance(a, int):
+        raise TypeError("bruteForceModInverse - a must be an integer. Was %s" % (str(type(a))))
+    if not isinstance(m, int):
+        raise TypeError("bruteForceModInverse - m must be an integer. Was %s" % (str(type(m))))
 
     if gcdLC.findGCD(a, m) != 1:
         return None
@@ -24,6 +28,11 @@ def modInverse(a, m):
     # in linearCombination a > m even if not inputted that way
     # so keep track of what linearCombination returns as a and m
 
+    if not isinstance(a, int):
+        raise TypeError("modInverse - a must be an integer. Was %s" % (str(type(a))))
+    if not isinstance(m, int):
+        raise TypeError("modInverse - m must be an integer. Was %s" % (str(type(m))))
+
     gcd, returnedA, returnedM, u, v = gcdLC.linearCombination(a, m)
 
     if gcd != 1:
@@ -38,9 +47,19 @@ def modInverse(a, m):
 def numbersToLetters(alphabet, numberEncoding):
     # for when encoded string is given as numbers instead of letters
     # for example: "0 15 21" instad of "APV" when alphabet is "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+
+    if not isinstance(alphabet, str):
+        raise TypeError("numbersToLetters - alphabet must be a string. Was %s" % (str(type(alphabet))))
+    if not isinstance(numberEncoding, str):
+        raise TypeError("numbersToLetters - numberEncoding must be an integer. Was %s" % (str(type(numberEncoding))))
+
     letters = ""
     numberEncodingList = numberEncoding.split(" ")
     for n in numberEncodingList:
         letters += alphabet[int(n)]
 
     return letters
+
+
+if __name__ == "__main__":  # true if run directly via the command line
+    raise UserWarning("miscTools.py is not intended to be used via the command line. Please import it into a Python program and use the methods directly.")
