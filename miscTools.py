@@ -53,6 +53,7 @@ def numbersToLetters(alphabet, numberEncoding):
     if not isinstance(numberEncoding, str):
         raise TypeError("numbersToLetters - numberEncoding must be an integer. Was %s" % (str(type(numberEncoding))))
 
+    numberEncoding = numberEncoding.strip()  # remove leading or trailing whitespace
     letters = ""
     numberEncodingList = numberEncoding.split(" ")
     for n in numberEncodingList:
