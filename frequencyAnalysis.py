@@ -2,21 +2,6 @@
 # import affine
 
 
-def affineEncode(alphabet, key, plaintext):
-    alphalength = len(alphabet)
-
-    plaintextCAP = plaintext.upper()
-    encryptedtext = ""
-
-    for c in plaintextCAP:
-        letterKey = alphabet.find(c)
-        encodedNumber = (((letterKey) * key[0]) + key[1]) % alphalength
-        encodedLetter = alphabet[encodedNumber]
-        encryptedtext += encodedLetter
-
-    return encryptedtext
-
-
 def getFrequencyAnalysis(alphabet, string):
     # returns list of tuples for every letter in alphabet
     # tuple: (N,L) where N is the frequency of letter L in the string
