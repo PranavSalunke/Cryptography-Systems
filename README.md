@@ -26,6 +26,7 @@ I hope you have as much fun playing with this as much as I had making these!
 - [Usage for command line](#usage-for-command-line)
 - [Documentation for use in external programs](#documentation-for-use-in-external-programs)
 - [The Example Program](#the-example-program)
+- [Bonus Cipher](#bonus-cipher)
 
 ## Crypto Systems in this folder
 - Affine
@@ -129,6 +130,7 @@ This will show the work to calculate the GCD
 ### Frequency Analysis
 
 ### Miscellaneous Tools
+This file is not intended for use via the command line. To use the methods, import it into your own project `import miscTools` and refer to to the documentation in the [Documentation for use in external programs](#documentation-for-use-in-external-programs) section. 
 
 ## Documentation for use in external programs
 
@@ -200,6 +202,98 @@ Example
 ### Frequency Analysis
 
 ### Miscellaneous Tools
+```
+miscTools.py
+```
+
+```
+bruteForceModInverse(a, m)
+```
+
+
+Takes two integers and returns the modular inverse of `a mod m`. Returns `None` if the modular inverse does not exist. 
+`a` integer
+`m` modulo (integer)
+
+The modular inverse of an integer , `a`, is an integer `b` such that  `a*b` is congruent to `1 mod m`
+
+This function uses the brute force method of finding the inverse by exhaustively searching for an inverse, `i`,  from `0` to `m` and checking if the `(a*i) mod m = 1`. This function can be very slow for a larger value of `m`. This function was built more for checking the correctness of `modInverse` and for learning.
+
+For practical uses, `modInverse` should be used instead. 
+
+Example:
+
+
+```
+>>> import miscTools
+>>> miscTools.bruteForceModInverse(23,840)
+767
+>>> (767*23)%840 # checking if this is 1
+1
+```
+
+```
+modInverse(a, m)
+```
+Takes two integers and returns the modular inverse of `a mod m`. Returns `None` if the modular inverse does not exist.
+`a` integer
+`m` modulo (integer)
+
+Same as `bruteForceModInverse` but it uses the Euclidean Algorithm to find the modular inverse via the `linearCombination` from `gcdLC`.
+This function is much faster. 
+
+Example:
+
+```
+>>> import miscTools
+>>> miscTools.modInverse(23,840)
+767
+```
+
+```
+numbersToLetters(alphabet, numberEncoding)
+```
+
+`alphabet` string of the alphabet used for the encoded and plain text messages 
+`numberEncoding` string of numbers separated by spaces
+
+All the crypto systems that I implemented assume the encoded message comes in as a string of letters (ex. `HELLO THERE`). The characters depend on the alphabet. For the example the alphabet is `ABCDEFGHIJKLMNOPQRSTUVWXYZ ` with a space after `Z` to create an alphabet of 27 characters. 
+
+However, the numbers can be refereed to by their index as well. For instance `A=0`, `B=1` ...
+
+You may be given the encoded or decoded string as a string of numbers instead and you need to convert it to the string of characters that the programs expect. (ex. `HELLO THERE` could be given as `7 4 11 11 14 26 19 7 4 17 4`)
+
+Returns a string of letters.
+
+Example:
+
+```
+>>> import miscTools
+>>> msg = "7 4 11 11 14 26 7 14 22 26 0 17 4 26 24 14 20"
+>>> miscTools.numbersToLetters(alph,msg)
+'HELLO HOW ARE YOU'
+```
+
+```
+lettersToNumbers(alphabet, message)
+```
+
+`alphabet` string of the alphabet used for the encoded and plain text messages 
+`numberEncoding` string of letters in the alphabet
+
+The reverse of numbersToLetters. If you want to convert a string of letters to their numeric value.
+
+Returns a string of numbers separated by a space.
+
+Example:
+
+```
+>>> import miscTools
+>>> alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+>>> msg = "HELLO HOW ARE YOU"
+>>> miscTools.lettersToNumbers(alph,msg)
+'7 4 11 11 14 26 7 14 22 26 0 17 4 26 24 14 20'
+```
 
 ## The Example Program
 I created an example program `exampleProgram.py` showcasing how these crypto systems can be used in your own programs! 
@@ -207,3 +301,7 @@ Just run it in the command line with python 3 `py -3 exampleProgram.py` or `pyth
 The output will be printed out to the console. 
 
 If you like, take a look at how it works and play around with it! 
+
+## Bonus Cipher
+
+All the above Crypto Systems are pretty complex. But I have been interested in such things even years before taking the class that inspired me to make this whole project. [I made one many years ago](https://github.com/PranavSalunke/FirstPythonProjects/blob/master/my%20code/MY%20code.pyw) and it wasn't very well implemented, nor was it very secure. But I was very proud of it when I made it. Younger me would be ecstatic to know that I have grown as a programmer and computer scientist and that I was able to produce a project as detailed and involved as this! 
