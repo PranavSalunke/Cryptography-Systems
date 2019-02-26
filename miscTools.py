@@ -46,20 +46,45 @@ def modInverse(a, m):
 
 def numbersToLetters(alphabet, numberEncoding):
     # for when encoded string is given as numbers instead of letters
-    # for example: "0 15 21" instad of "APV" when alphabet is "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+    # for example: "0 15 21" instead of "APV" when alphabet is "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
 
     if not isinstance(alphabet, str):
         raise TypeError("numbersToLetters - alphabet must be a string. Was %s" % (str(type(alphabet))))
     if not isinstance(numberEncoding, str):
-        raise TypeError("numbersToLetters - numberEncoding must be an integer. Was %s" % (str(type(numberEncoding))))
+        raise TypeError("numbersToLetters - numberEncoding must be a string. Was %s" % (str(type(numberEncoding))))
 
     numberEncoding = numberEncoding.strip()  # remove leading or trailing whitespace
     letters = ""
     numberEncodingList = numberEncoding.split(" ")
     for n in numberEncodingList:
-        letters += alphabet[int(n)]
+        try:
+            num = int(n)
+            letters += alphabet[num]
+        except ValueError:
+            raise ValueError("numbersToLetters - %s passed in numberEncoding is not a valid interger" % (str(n)))
+        except IndexError:
+            raise IndexError("numbersToLetters - %d is not a valid numeric index for alphabet: \"%s\" should be between 0-%d" %
+                             (num, alphabet, len(alphabet)-1))
 
     return letters
+
+
+def lettersToNumbers(alphabet, message):
+    # to turn a message to its number encoding equivalent
+    # for example: "APV" instead of "0 15 21" when alphabet is "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+
+    if not isinstance(alphabet, str):
+        raise TypeError("lettersToNumbers - alphabet must be a string. Was %s" % (str(type(alphabet))))
+    if not isinstance(message, str):
+        raise TypeError("lettersToNumbers - message must be a string. Was %s" % (str(type(message))))
+
+    numbers = ""
+    for m in message:
+        n = alphabet.find(m)
+        if n < 0:  # not in alphabet
+            raise IndexError("lettersToNumbers - %s is not a valid letter in the alphabet: \"%s\"" % (m, alphabet))
+        numbers += str(n) + " "
+    return numbers.strip()
 
 
 if __name__ == "__main__":  # true if run directly via the command line
