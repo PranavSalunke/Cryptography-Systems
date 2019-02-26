@@ -32,7 +32,7 @@ print("The numerical representation is: \"%s\"" % (messageNums))
 print()
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ.!?,:) "
 messageNums = "8 32 0 12 32 22 4 11 11 29 32 19 7 0 13 10 18 32 5 14 17 32 0 18 10 8 13 6 27 32 30 3"
-print("convert the message  \"%s\" to its letter representation \n in the alphabet: \"%s\"" % (message, alphabet))
+print("convert the message  \"%s\" to its letter representation \n in the alphabet: \"%s\"" % (messageNums, alphabet))
 message = miscTools.numbersToLetters(alphabet, messageNums)
 print("The letter representation is: \"%s\"" % (message))
 
