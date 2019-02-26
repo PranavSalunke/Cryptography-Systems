@@ -60,11 +60,15 @@ def numbersToLetters(alphabet, numberEncoding):
         try:
             num = int(n)
             letters += alphabet[num]
-        except ValueError:
-            raise ValueError("numbersToLetters - %s passed in numberEncoding is not a valid interger" % (str(n)))
-        except IndexError:
-            raise IndexError("numbersToLetters - %d is not a valid numeric index for alphabet: \"%s\" should be between 0-%d" %
-                             (num, alphabet, len(alphabet)-1))
+        except ValueError as v:
+            customMsg = "numbersToLetters - %s, passed in the numberEncoding string, is not a valid interger" % (str(n))
+            v.args = (customMsg, *v.args)
+            raise v
+        except IndexError as i:
+            customMsg = "numbersToLetters - %d is not a valid numeric index for alphabet: \"%s\" should be between 0-%d" % (
+                num, alphabet, len(alphabet)-1)
+            i.args = (customMsg, *i.args)
+            raise i
 
     return letters
 
