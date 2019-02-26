@@ -86,10 +86,11 @@ def lettersToNumbers(alphabet, message):
     for m in message:
         n = alphabet.find(m)
         if n < 0:  # not in alphabet
-            raise IndexError("lettersToNumbers - %s is not a valid letter in the alphabet: \"%s\"" % (m, alphabet))
+            raise IndexError("lettersToNumbers - \"%s\" is not a valid letter in the alphabet: \"%s\"" % (m, alphabet))
         numbers += str(n) + " "
     return numbers.strip()
 
 
 if __name__ == "__main__":  # true if run directly via the command line
-    raise UserWarning("miscTools.py is not intended to be used via the command line. Please import it into a Python program and use the methods directly.")
+    # raise UserWarning("miscTools.py is not intended to be used via the command line. Please import it into a Python program and use the methods directly.")
+    print(lettersToNumbers("ABCDEFGHIJKL", "AB C"))
