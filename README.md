@@ -72,6 +72,8 @@ We know `a^-1 = 25`. We have the message `FS` which is `5 18`
 `S=18: ((25*18)-(25*22)) mod 27 = 7` and `8=I`
 And we get `HI` again.
 
+You can also brute force by trying all possible values for `a` and `b`.
+
 
 ### Affine Matrix
 
