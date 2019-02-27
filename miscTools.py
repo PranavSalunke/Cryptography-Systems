@@ -92,5 +92,4 @@ def lettersToNumbers(alphabet, message):
 
 
 if __name__ == "__main__":  # true if run directly via the command line
-    # raise UserWarning("miscTools.py is not intended to be used via the command line. Please import it into a Python program and use the methods directly.")
-    print(lettersToNumbers("ABCDEFGHIJKL", "AB C"))
+    raise UserWarning("miscTools.py is not intended to be used via the command line. Please import it into a Python program and use the methods directly.")
