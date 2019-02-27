@@ -1,8 +1,60 @@
 # Pranav Salunke
+import argparse
 
 # import my own program
 import gcdLC
 import miscTools
+
+
+def setArgParse():
+    if __name__ != "__main__":
+        raise UserWarning("setArgParse() should not be called from a script when affine.py is imported. Use methods directly.")
+
+    parser = argparse.ArgumentParser(description='Program to use the Affine Crypto System')
+
+    parser.add_argument("-a", "--alphabet",
+                        type=str,
+                        default="ABCDEFGHIJKLMNOPQRSTUVWXYZ ",
+                        help="The alphabet that is used in the plaintext and encodedtext. Default: \"ABCDEFGHIJKLMNOPQRSTUVWXYZ \" "
+                        )
+    modeparsers = parser.add_subparsers(title="Mode",
+                                        description="Specify a mode for the Affine program. Required",
+                                        help='Affine Encode, Decode, or Brute force attack',
+                                        dest="mode"
+                                        )
+    modeparsers.required = True
+    # parameters for encoding using Afineaz
+    encodeParser = modeparsers.add_parser("encode", aliases=['e'])
+    encodeParser.add_argument("key",
+                              type=int,
+                              nargs=2,
+                              help="The key, (a,b), to be used to encode the message. Enter as two integers: a b. ex: 13 25")
+    encodeParser.add_argument("plaintext",
+                              type=str,
+                              help="The plain text message to be encoded"
+                              )
+
+    # parameters for decoding using Afine
+    decodeParser = modeparsers.add_parser("decode", aliases=['d'])
+    decodeParser.add_argument("key",
+                              type=int,
+                              nargs=2,
+                              help="The key, (a,b), to be used to decode the message. Enter as two integers: a b. ex: 13 25"
+                              )
+    decodeParser.add_argument("encodedtext",
+                              type=str,
+                              help="The enccoded message to be decoded"
+                              )
+
+    # parameters for the bruteforce attack on an encoded string
+    bruteforceParser = modeparsers.add_parser("bruteforce", aliases=['b'])
+    bruteforceParser.add_argument("encodedtext",
+                                  type=str,
+                                  help="The enccoded message to be decoded by using an exhaustive brute force attack. You need to know the alphabet used"
+                                  )
+    args = parser.parse_args()
+
+    return args
 
 
 def affineEncode(alphabet, key, plaintext):
@@ -46,6 +98,8 @@ def bruteForceCrack(alphabet, encodedString):
                 print("%d %d\n%s" % (a, b, d))
 
 
+args = setArgParse()
+print(args)
 # alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
 # alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ.!?,:) "
@@ -59,11 +113,7 @@ key = (11, 25)  # a,b where b is the length of the alphabet, and a and b must be
 
 
 # numberEncoding = "15 8 1 17 13 9 17 10 11 1 9 10 22 2 7 17 21 1 24 22 7 12 17 10 1 21 25 24 11 1 2 17 1 17 8 3 22 26 17 3 1 26 19 11 5 1 11 26 22 1 19 8 16 22 21 9 15 11 19 2 7 17 1 23 25 15 7 19 11 19 17 24 1 1 15 1 10 17 24 11 7 17 24 24 1 19 21 15 18 19 8 15 11 19 22 8 1 15 8 3 1 15 1 9 15 11 19 17 8 11 1 9 17 10 11 19 8 15 16 19 11 0 1 1 5 22 26 15 10 3 1 26 1 17 12 17 24"
-# # from most freqent to least frequent
-knownFreq = " ETAOINSHRDLCUMWFGYPBVKJXQZ"  # for a-z + space alphabet
-# asLetters = numbersToLetters(alphabet, numberEncoding)
-# print(affineDecode(alphabet, (14, 15), asLetters))
-# frequency = frequencyAnalysis(alphabet, asLetters, False)
+
 
 # bruteForceCrack(alphabet, asLetters)
 # message = "I JUST FINISHED MY LAST CRYPTO HW!!"
