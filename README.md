@@ -49,8 +49,29 @@ I hope you have as much fun playing with this as much as I had making these!
 ## Crypto System description
 This section will discuss the general idea about how the particular crypto system works
 
+For this discussion, I assume the alphabet `ABCDEFGHIJKLMNOPQRSTUVWXYZ ` with a space after `Z` to create an alphabet of 27 characters. The numeric values for these are as follows
+`A = 0`,`B = 1`, ..., `Z = 25`, `(space)= 26`.
+
 ### Affine
-key (a,b) gcd(a,b) = 1 and b = length alphabet
+The  [affine crypto system](https://en.wikipedia.org/wiki/Affine_cipherlink) is a substitution cipher. Each letter is substituted with another letter in the alphabet with the function `ap+b mod n` where  `(a,b)` is the key, `p` is the numeric representation of the letter, and `n` is the number of characters in the alphabet. You may be familiar with the . The equivalent affine cipher is the key with `a=1`
+
+Rules for the key:
+    `a` must be a value that has a modular inverse with mod `n`. That is, `gcd(a,n) = 1`
+    `b` must be a value from `0` to `n-1`
+
+For instance with the alphabet I specified, we know `n=27`. Say the message we want to encode is `HI` with the numerical representation `7 8`.
+Lets use the key `(a=13,b=22)` we can use `a=13` since `13*25 mod 27 = 1`
+Lets convert the message. Rembeber the formula `ap+b mod n`
+`H=7: ((13 * 7) + 22) mod 27 = 5` and `5=F`
+`I=8: ((13 * 8) + 22) mod 27 = 18` and `18=S`
+So the encoded message is `FS`
+
+To decode, you do the reverse. If you know the key you find the inverse of `a` denoted `a^-1` and apply the function `(a^-1)p - (a^1)b`
+We know `a^-1 = 25`. We have the message `FS` which is `5 18`
+`F=5: ((25*5)-(25*22)) mod 27 = 7` and `7=H`
+`S=18: ((25*18)-(25*22)) mod 27 = 7` and `8=I`
+And we get `HI` again.
+
 
 ### Affine Matrix
 
