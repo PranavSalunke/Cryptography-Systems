@@ -1,7 +1,7 @@
 
 # Cryptography Systems
 
-This code was written for my cryptography class as way to apply the things I learned.
+This project was inspired by code that was written for my cryptography class as way to apply the things I learned.
 The course itself was a math course, so we learned about the mathematical theory behind the systems such as 
 rings, groups, modular arithmetic, etc. The code written here is somewhat specialized to the systems
 we discussed in class and may have some variation from the "real" systems used in practice. 
@@ -9,10 +9,10 @@ This was for the learning experience (and to send encoded messages to my friends
 
 That said, this is not intended for copying for any other course. Plus, other courses may have variations.
 If another student comes across this, I would highly recommend trying to implement these systems on your own.
-It's very satisfying once you get it! 
+It's very satisfying once you get it! But, please do use this as a reference if it helps. 
 
-I hard coded everything I needed for class, but I wanted to share this with the public. I found these programs really cool and fun!
-So for it to be more useful, I have changed it so that they can be used by the public (you!) through command line arguments or imported into your own programs (essentially making this into a pseudo-library of sorts)! 
+I found these programs really cool and fun! I hard coded everything I needed when I was in the class, but I wanted to share this with the public. 
+So for it to be more useful, I have changed it, a lot,  so that they can be used by the public (you!) through command line arguments or imported into your own programs (essentially making this into a pseudo-library of sorts)! These modifications were more involved than I expected.. as with every project
 
 All the details of each crypto system, the usage for my programs, and other info can be found below.
 
