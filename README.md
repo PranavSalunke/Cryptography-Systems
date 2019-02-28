@@ -106,11 +106,89 @@ These are tools that don't fit in with any particular crypto system. These are n
 These programs are created for Python 3 and are intended to be used via the command line
 You may me able to run python 3 with the command `python3` or `py -3` on Windows. I will use `py -3` in the examples.
 To download Python and view its documentation, refer to [Python's Official Site](https://www.python.org/)
-Each of the systems are self contained in their files and have various arguments. The details for these are below. 
+Each of the systems are self contained in their files and have various command line arguments. The details for these are below. 
 
-Additionally, any of these can be imported with the `import` keyword. The internal functions can be use in your own scripts.
+Additionally, any of these can be imported with the `import` keyword. The internal functions can be use in your own scripts.  [Documentation here](#documentation-for-use-in-external-programs)
 
 ### Affine
+This program is used to encode, decode, and crack Affine ciphers. This program uses subcommands as detailed below.
+
+Help message `py -3 .\affine.py -h`
+
+```
+usage: affine.py [-h] [-a ALPHABET] {encode,e,decode,d,bruteforce,b} ...
+
+Program to use the Affine Crypto System
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -a ALPHABET, --alphabet ALPHABET
+                        The alphabet that is used in the plaintext and
+                        encodedtext. Default: "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+
+Mode:
+  Specify a mode for the Affine program. Required
+
+  {encode,e,decode,d,bruteforce,b}
+                        Affine Encode, Decode, or Brute force attack
+```
+
+Every mode will require an alphabet so it is specified before the mode. If none is given, the default is used. This can 
+
+Use default alphabet
+
+```
+ py -3 .\affine.py ...
+```
+
+Use a custom alphabet of `ABCDEFGHIJKLMNOPQRSTUVWXYZ 123456789!?.,`
+
+```
+ py -3 .\affine.py "ABCDEFGHIJKLMNOPQRSTUVWXYZ 123456789!?.," ...
+```
+
+Now that the alphabet has been set, we can to go into the details of the fun things we can do!
+
+*Encode* help message `py -3 .\affine.py encode -h`. You may use `e` instead of `encode`.
+
+```
+usage: affine.py encode [-h] key key plaintext
+
+positional arguments:
+  key         The key, (a,b), to be used to encode the message. Enter as two
+              integers: a b. ex: 13 25
+  plaintext   The plain text message to be encoded
+
+optional arguments:
+  -h, --help  show this help message and exit
+```
+
+*Decode* help message. You may use `d` instead of `decode`.
+
+```
+usage: affine.py decode [-h] key key encodedtext
+
+positional arguments:
+  key          The key, (a,b), to be used to decode the message. Enter as two
+               integers: a b. ex: 13 25
+  encodedtext  The encoded message to be decoded
+
+optional arguments:
+  -h, --help   show this help message and exit
+```
+
+Brute force crack help message `py -3 .\affine.py bruteforce -h`. You may use `b` instead of `bruteforce`.
+
+```
+usage: affine.py bruteforce [-h] encodedtext
+
+positional arguments:
+  encodedtext  The encoded message to be decoded by using an exhaustive brute
+               force attack. You need to know the alphabet used
+
+optional arguments:
+  -h, --help   show this help message and exit
+```
 
 ### Affine Matrix
 
