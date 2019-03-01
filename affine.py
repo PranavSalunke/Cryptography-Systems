@@ -64,6 +64,8 @@ def affineEncode(alphabet, key, plaintext):
 
     for c in plaintext:
         letterKey = alphabet.find(c)
+        if letterKey < 0:
+            raise UserWarning("Letter %s does not exist in the alphabet \"%s\"" % (c, alphabet))
         encodedNumber = (((letterKey) * key[0]) + key[1]) % alphalength
         encodedLetter = alphabet[encodedNumber]
         encryptedtext += encodedLetter
@@ -79,6 +81,8 @@ def affineDecode(alphabet, key, encryptedtext):
     decoded = ""
     for e in encryptedtext:
         cipherLetterKey = alphabet.find(e)
+        if cipherLetterKey < 0:
+            raise UserWarning("Letter %s does not exist in the alphabet \"%s\"" % (e, alphabet))
         d = inverse * (cipherLetterKey - b)
         d = d % z
         decoded += alphabet[d]
