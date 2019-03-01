@@ -96,10 +96,8 @@ def bruteForceCrack(alphabet, encodedString):
     s = ""
     for a in range(1, z + 1):  # z+1 because range(a,b) goes from a to b-1
         if(gcdLC.findGCD(a, z) == 1):
-            # print(str(a) + " " + str(linearCombination(a, 27)))
-            for b in range(1, z + 1):
+            for b in range(0, z):
                 d = affineDecode(alphabet, (a, b), encodedString)
-                # print("%d %d\n%s" % (a, b, d))
                 s += "key: (%d,%d)\n%s" % (a, b, d)
                 s += "\n"
 
@@ -114,6 +112,9 @@ def main():
     def validateKey(key, n):
         a = key[0]
         b = key[1]
+        if a == 0:
+            raise UserWarning("0 is an invalid value for 'a'")
+
         if gcdLC.findGCD(a, n) != 1:
             raise UserWarning(
                 "%d is an invalid value for 'a' in the key (a,b). Make sure it is invertable in 'n' where 'n' is the number of characters in your alphabet (%d). That is, gcd(a,n)=1" % (a, len(alph)))
@@ -142,8 +143,8 @@ def main():
         print("You can now read the secret message!")
     elif mode == "bruteforce" or mode == "b":
         text = args.encodedtext
-        s = bruteForceCrack(alph, text)
         print("Attempting to crack the code (this could take a while)...")
+        s = bruteForceCrack(alph, text)
         print(s)
         print("Hopefully, the code was cracked! Which one of these is readable?")
 
