@@ -89,12 +89,17 @@ def bruteForceCrack(alphabet, encodedString):
     # tries all possible key values
     # prints out the attempted key pair and the corresponding decoded string
     z = len(alphabet)
+    s = ""
     for a in range(1, z + 1):  # z+1 because range(a,b) goes from a to b-1
         if(gcdLC.findGCD(a, z) == 1):
             # print(str(a) + " " + str(linearCombination(a, 27)))
             for b in range(1, z + 1):
                 d = affineDecode(alphabet, (a, b), encodedString)
-                print("%d %d\n%s" % (a, b, d))
+                # print("%d %d\n%s" % (a, b, d))
+                s += "key: (%d,%d)\n%s" % (a, b, d)
+                s += "\n"
+
+    return s
 
 
 def main():
@@ -107,7 +112,7 @@ def main():
         b = key[1]
         if gcdLC.findGCD(a, n) != 1:
             raise UserWarning(
-                "%d is an invalid value for 'a' in the key (a,b). Make sure it is invertable in 'n' where 'n' is the number of characters in your alphabet. That is, gcd(a,n)=1" % (a))
+                "%d is an invalid value for 'a' in the key (a,b). Make sure it is invertable in 'n' where 'n' is the number of characters in your alphabet (%d). That is, gcd(a,n)=1" % (a, len(alph)))
         if b < 0 or b >= n:
             raise UserWarning(
                 "%d is an invalided value for 'b' in the key (a,b). Make sure b is in the inclusive range [0-%d] (one less than the number of characters in your alphabet)" % (b, n-1))
@@ -119,15 +124,24 @@ def main():
         validateKey(key, len(alph))
         text = args.plaintext
         encoded = affineEncode(alph, key, text)
-        print(encoded)
+
+        print("Encoding the string: \"%s\"" % (text))
+        print("The encoded string: \"%s\"" % (encoded))
+        print("Now you can send this encrypted message to your friend!")
     elif mode == "decode" or mode == "e":
         key = args.key
         validateKey(key, len(alph))
         text = args.encodedtext
         decoded = affineDecode(alph, key, text)
-        print(decoded)
+        print("Decoding the string: \"%s\"" % (text))
+        print("The decoded string: \"%s\"" % (decoded))
+        print("You can now read the secret message!")
     elif mode == "bruteforce" or mode == "b":
-        print("BRUTEFOCE")
+        text = args.encodedtext
+        s = bruteForceCrack(alph, text)
+        print("Attempting to crack the code (this could take a while)...")
+        print(s)
+        print("Hopefully, the code was cracked! Which one of these is readable?")
 
 
 if __name__ == "__main__":  # true if run directly via the command line
