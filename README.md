@@ -135,6 +135,7 @@ Mode:
 
 Every mode will require an alphabet so it is specified before the mode. If none is given, the default is used. This can 
 
+**Examples**
 Use default alphabet
 
 ```
@@ -144,12 +145,12 @@ Use default alphabet
 Use a custom alphabet of `ABCDEFGHIJKLMNOPQRSTUVWXYZ 123456789!?.,`
 
 ```
- py -3 .\affine.py "ABCDEFGHIJKLMNOPQRSTUVWXYZ 123456789!?.," ...
+ py -3 .\affine.py -a "ABCDEFGHIJKLMNOPQRSTUVWXYZ 123456789!?.," ...
 ```
 
 Now that the alphabet has been set, we can to go into the details of the fun things we can do!
 
-*Encode* help message `py -3 .\affine.py encode -h`. You may use `e` instead of `encode`.
+**Encode** help message `py -3 .\affine.py encode -h`. You may use `e` instead of `encode`.
 
 ```
 usage: affine.py encode [-h] key key plaintext
@@ -163,7 +164,17 @@ optional arguments:
   -h, --help  show this help message and exit
 ```
 
-*Decode* help message. You may use `d` instead of `decode`.
+**Examples**
+Using the default alphabet
+
+`py -3 .\affine.py encode 4 23 "GREETINGS"`
+
+Using a custom alphabet:
+
+`py -3 .\affine.py -a "ABCDEFGabcdefghijklmnopqrstuvwxyz !,.:"  encode 17 35 "Greetings!! :D"`
+
+
+**Decode** help message. You may use `d` instead of `decode`.
 
 ```
 usage: affine.py decode [-h] key key encodedtext
@@ -177,6 +188,15 @@ optional arguments:
   -h, --help   show this help message and exit
 ```
 
+**Examples**
+Using the default alphabet
+
+`py -3 .\affine.py decode 4 23 "UKMMSBVUO"`
+
+Using a custom alphabet:
+
+`py -3 .\affine.py -a "ABCDEFGabcdefghijklmnopqrstuvwxyz !,.:"  decode 17 35 "qszzor vEFFtld"`
+
 Brute force crack help message `py -3 .\affine.py bruteforce -h`. You may use `b` instead of `bruteforce`.
 
 ```
@@ -189,6 +209,18 @@ positional arguments:
 optional arguments:
   -h, --help   show this help message and exit
 ```
+*NOTE:* You need to know what alphabet was used to do this 
+
+**Examples**
+This one will be an easy one to find :) (hint: start at the bottom)
+`py -3 .\affine.py -a "ABCDEFGHIJKLMNOPQRSTUVWXYZ :';!)" bruteforce "XFMRU'FHRLFMYXNFJXUUF!:F)SF:)NHFRS:FMRF XS'CFXMDNFMY:FU)NMFRS:BFEA"`
+
+There are less combinations if there is a smaller alphabet (you may not even need to brute force it to figure out what it is!)
+`py -3 .\affine.py -a "puvy" bruteforce "vyvvu"`
+
+And a last one with the default alphabet for good measure.
+`py -3 .\affine.py bruteforce "BHLYCNLXXCKWCGCHGUSWUCBIC LES"`
+
 
 ### Affine Matrix
 
@@ -218,7 +250,7 @@ optional arguments:
   -showGcdWork          Include this flag to show the work in finding the GCD.
 ```
 
-Examples:
+**Examples**
 Just two numbers. This will return the GCD and the Linear Combination of the two numbers
     `py -3 .\gcdLC.py 432 32`
 
