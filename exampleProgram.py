@@ -9,6 +9,7 @@ import random
 #  my programs (make sure they are in the same folder as this file!)
 import gcdLC
 import miscTools
+import affine
 
 ##-- miscTools.py
 print("\n---EXAMPLE FOR miscTools.py---\n")
@@ -66,6 +67,26 @@ print("GCD: %d" % (gcd3))
 
 ##-- affine.py
 print("\n---EXAMPLE FOR affine.py---\n")
+alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+text = "THIS IS AN EXAMPLE"
+print("Encoding \"%s\" with the key (5,11) using alphabet \"%s\"" % (text, alph))
+encoded = affine.affineEncode(alph, (5, 11), text)
+print("This is the output: %s" % (encoded))
+
+print()
+encodedtext = "FJgyWgyWHpWuGHSiwuWLQWXuALXgpnWHWSuyyHnuWrygpnWUJuWtQQgpuWSuUJLXWHQQgpuIuALXuWygpAuWdLrWHwbuHXdWZpLkWUJuWZud"
+specialAlph = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+print("Decoding \"%s\"\nwith the key (23,34)\nusing alphabet \"%s\"" % (encodedtext, specialAlph))
+decoded = affine.affineDecode(specialAlph, (23, 34), encodedtext)
+print("This is the plain text message: %s" % (decoded))
+
+print()
+unknownMessage = "NCNLKFILOCSNLVPCHLEAHHZBA"
+alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+print("We don't know the key for this message: %s. We do know the alphabet used: %s, Let's bruteforce it!" % (unknownMessage, alph))
+bruteforce = affine.bruteForceCrack(alph, unknownMessage)
+print(bruteforce)
+print("which one was right? (There are a lot of possibilities, thats why it's better to know the key!)")
 
 ##-- affineMatrix.py
 print("\n---EXAMPLE FOR affineMatrix.py---\n")
