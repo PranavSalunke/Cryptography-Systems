@@ -45,6 +45,8 @@ I hope you have as much fun playing with this as much as I had making these!
     - frequencyAnalysis.py
 - Miscellaneous Tools
     - miscTools.py
+- Example Program
+    - exampleProgram.py
 
 ## Crypto System description
 This section will discuss the general idea about how the particular crypto system works
@@ -76,10 +78,13 @@ You can also brute force by trying all possible values for `a` and `b`.
 
 
 ### Affine Matrix
+Under construction... coming soon!
 
 ### Knapsack
+Under construction... coming soon!
 
 ### RSA
+Under construction... coming soon!
 
 ## Other Program description
 
@@ -223,10 +228,13 @@ And a last one with the default alphabet for good measure.
 
 
 ### Affine Matrix
+Under construction... coming soon!
 
 ### Knapsack
+Under construction... coming soon!
 
 ### RSA
+Under construction... coming soon!
 
 ### GCD/Linear Combination 
 This program will give you the Greatest Common Divisor (GCD) or the Linear Combination or both of two numbers  (num1 and num2
@@ -261,6 +269,7 @@ This will show the work to calculate the GCD
     `py -3 .\gcdLC.py -showGcdWork  223 2353`
 
 ### Frequency Analysis
+Under construction... coming soon!
 
 ### Miscellaneous Tools
 This file is not intended for use via the command line. To use the methods, import it into your own project `import miscTools` and refer to to the documentation in the [Documentation for use in external programs](#documentation-for-use-in-external-programs) section. 
@@ -275,11 +284,104 @@ Below are the methods that are accessible, their arguments, what they do, and th
 
 ### Affine
 
+```
+affine.py
+```
+
+```
+affineEncode(alphabet, key, plaintext)
+```
+The command line tool has been built to have a default alphabet for ease of use. However, an alphabet must be provided when using it in your own programs.
+
+Takes an alphabet, the key, and the message to encrypt.
+`alphabet` every letter in the alphabet as a string
+`key` the key (a,b) as a tuple or list of two elements
+`plaintext` the text to be encrypted as a string
+
+**Example**:
+
+```
+>>> import affine
+>>> alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890/!?."
+>>> key = (15,18)
+>>> text = "HI! HOW ARE YOU? THIS PROGRAM IS 10/10!"
+>>> affine.affineEncode(alph,key,text)
+'APO?AXU?S1/?JX53?QAPB?!1X 1S8?PB?NZ.NZO'
+```
+
+```
+affineDecode(alphabet, key, encryptedtext)
+```
+The command line tool has been built to have a default alphabet for ease of use. However, an alphabet must be provided when using it in your own programs.
+
+Takes an alphabet, the key, and the message to decipher.
+`alphabet` every letter in the alphabet as a string
+`key` the key (a,b) as a tuple or list of two elements
+`encryptedtext` the message to be decrypted as a string
+
+**Example**:
+
+```
+>>> import affine
+>>> alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+>>> key = (19,8)
+>>> text = "SGZ QZ QSGDQLDWIKBSQIBXGIADSQWEHQSGDQTEUUIMLQBZMDQSEEB"
+>>> affine.affineDecode(alph,key,text)
+'THIS IS THE DEFAULT ALPHABET FOR THE COMMAND LINE TOOL'
+```
+
+```
+bruteForceCrack(alphabet, encodedString)
+```
+This is for when you have an encoded message, know the alphabet used, but have forgotten or don't have the key
+The combinations of all (a,b) keys grow as the alphabet grows. Here is a contrived alphabet and word so there are less combinations
+
+Takes an alphabet, the key, and the message to decipher.
+`alphabet` every letter in the alphabet as a string
+`encodedString` the message to be decrypted as a string
+
+**Example**:
+
+```
+>>> import affine
+>>> alph = "dbacog"
+>>> text = "cgo"
+>>> allCombos = affine.bruteForceCrack(alph,text) # returns a string with special characters, looks better printed out
+>>> print(allCombos)
+key: (1,0)
+cgo
+key: (1,1)
+aoc
+key: (1,2)
+bca
+key: (1,3)
+dab
+key: (1,4)
+gbd
+key: (1,5)
+odg
+key: (5,0)
+cba
+key: (5,1)
+oac
+key: (5,2)
+gco
+key: (5,3)
+dog
+key: (5,4)
+bgd
+key: (5,5)
+adb
+```
+
 ### Affine Matrix
+Under construction... coming soon!
 
 ### Knapsack
+Under construction... coming soon!
 
 ### RSA
+Under construction... coming soon!
 
 ### GCD/Linear Combination 
 ```
@@ -294,7 +396,7 @@ Takes two integers and returns their Greatest Common Divisor (GCD).
 `num2` second integer
 `showGcdWork` To show the work for finding the GCD or not. If true, prints out to standard output. Default is False.
 
-Example:
+**Example**
 
 ```
 >>> import gcdLC
@@ -322,7 +424,7 @@ returns the tuple (gcd, a, b, u, v,)
 `u` and `v` as such that
 `gcd = u*a + v*b`
 
-Example
+**Example**
 
 ```
 >>> y = gcdLC.linearCombination(15,100)
@@ -333,6 +435,7 @@ Example
 ```
 
 ### Frequency Analysis
+Under construction... coming soon!
 
 ### Miscellaneous Tools
 ```
@@ -354,7 +457,7 @@ This function uses the brute force method of finding the inverse by exhaustively
 
 For practical uses, `modInverse` should be used instead. 
 
-Example:
+**Example**
 
 
 ```
@@ -375,7 +478,7 @@ Takes two integers and returns the modular inverse of `a mod m`. Returns `None` 
 Same as `bruteForceModInverse` but it uses the Euclidean Algorithm to find the modular inverse via the `linearCombination` from `gcdLC`.
 This function is much faster. 
 
-Example:
+**Example**
 
 ```
 >>> import miscTools
@@ -398,7 +501,7 @@ You may be given the encoded or decoded string as a string of numbers instead an
 
 Returns a string of letters.
 
-Example:
+**Example**:
 
 ```
 >>> import miscTools
@@ -418,7 +521,7 @@ The reverse of numbersToLetters. If you want to convert a string of letters to t
 
 Returns a string of numbers separated by a space.
 
-Example:
+**Example**:
 
 ```
 >>> import miscTools
@@ -430,8 +533,25 @@ Example:
 
 ## The Example Program
 I created an example program `exampleProgram.py` showcasing how these crypto systems can be used in your own programs! 
-Just run it in the command line with python 3 `py -3 exampleProgram.py` or `python3 exampleProgram.py`.
-The output will be printed out to the console. 
+Just run it in the command line with python 3 `py -3 exampleProgram.py` or `python3 exampleProgram.py`. This will run all the examples. Use a flag to run a particular example. See below. 
+The output will be printed out to the console. This is not intended to be imported.
+
+```
+usage: exampleProgram.py [-h]
+                         [-s {miscTools,freqencyAnalysis,gcdLC,affine,affineMatrix,knapsack,rsa,all}]
+
+Example Program showing how to use the Crypto System in your own projects!
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -s {miscTools,freqencyAnalysis,gcdLC,affine,affineMatrix,knapsack,rsa,all}, --system {miscTools,freqencyAnalysis,gcdLC,affine,affineMatrix,knapsack,rsa,all}
+                        Choose which example to run. Default: all
+```
+
+**Example**
+`py -3 .\exampleProgram.py` print all examples
+`py -3 .\exampleProgram.py -s affine` print affine example
+`py -3 .\exampleProgram.py -s rsa` print rsa example
 
 If you like, take a look at how it works and play around with it! 
 
