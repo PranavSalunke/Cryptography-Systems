@@ -1,5 +1,5 @@
 # Pranav Salunke
-
+raise NotImplementedError("affineMatrix has not been completed yet. I am working on it! I will update the repository when it is completed!")
 import numpy as np
 
 

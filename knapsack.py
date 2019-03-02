@@ -1,3 +1,6 @@
+# Pranav Salunke
+
+raise NotImplementedError("knapsack has not been completed yet. I am working on it! I will update the repository when it is completed!")
 
 
 def decToBin(x):

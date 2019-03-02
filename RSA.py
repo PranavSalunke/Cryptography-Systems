@@ -1,5 +1,7 @@
 # Pranav Salunke
 
+raise NotImplementedError("rsa has not been completed yet. I am working on it! I will update the repository when it is completed!")
+
 
 def letterToNumber(alphabet, letter):
     n = alphabet.find(letter)

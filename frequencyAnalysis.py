@@ -1,5 +1,6 @@
 # Pranav Salunke
 # import affine
+raise NotImplementedError("freqencyAnalysis has not been completed yet. I am working on it! I will update the repository when it is completed!")
 
 
 def getFrequencyAnalysis(alphabet, string):
