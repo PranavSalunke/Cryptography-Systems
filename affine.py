@@ -58,10 +58,26 @@ def setArgParse():
 
 
 def affineEncode(alphabet, key, plaintext):
+    ################### HELPER METHOD ###################
+    def validateKey(key, n):
+        a = key[0]
+        b = key[1]
+        if a == 0:
+            raise UserWarning("0 is an invalid value for 'a'")
+
+        if gcdLC.findGCD(a, n) != 1:
+            raise UserWarning(
+                "%d is an invalid value for 'a' in the key (a,b). Make sure it is invertable in 'n' where 'n' is the number of characters in your alphabet (%d). That is, gcd(a,n)=1" % (a, len(alphabet)))
+        if b < 0 or b >= n:
+            raise UserWarning(
+                "%d is an invalided value for 'b' in the key (a,b). Make sure b is in the inclusive range [0-%d] (one less than the number of characters in your alphabet)" % (b, n-1))
+        # this check is not actually needed as b can be any integer since it will be modded by n anyway. so n and 0 are the same as far as the math is concerned.
+        #   But it makes more sense to keep it restricted between 0 and n-1
+    ################### HELPER METHOD ###################
+
     alphalength = len(alphabet)
-
     encryptedtext = ""
-
+    validateKey(key, alphalength)
     for c in plaintext:
         letterKey = alphabet.find(c)
         if letterKey < 0:
@@ -74,9 +90,27 @@ def affineEncode(alphabet, key, plaintext):
 
 
 def affineDecode(alphabet, key, encryptedtext):
+
+    ################### HELPER METHOD ###################
+    def validateKey(key, n):
+        a = key[0]
+        b = key[1]
+        if a == 0:
+            raise UserWarning("0 is an invalid value for 'a'")
+
+        if gcdLC.findGCD(a, n) != 1:
+            raise UserWarning(
+                "%d is an invalid value for 'a' in the key (a,b). Make sure it is invertable in 'n' where 'n' is the number of characters in your alphabet (%d). That is, gcd(a,n)=1" % (a, len(alphabet)))
+        if b < 0 or b >= n:
+            raise UserWarning(
+                "%d is an invalided value for 'b' in the key (a,b). Make sure b is in the inclusive range [0-%d] (one less than the number of characters in your alphabet)" % (b, n-1))
+        # this check is not actually needed as b can be any integer since it will be modded by n anyway. so n and 0 are the same as far as the math is concerned.
+        #   But it makes more sense to keep it restricted between 0 and n-1
+    ################### HELPER METHOD ###################
+
     a, b = key
     z = len(alphabet)
-
+    validateKey(key, z)
     inverse = miscTools.modInverse(a, z)
     decoded = ""
     for e in encryptedtext:
