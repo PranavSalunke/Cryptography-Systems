@@ -1,7 +1,7 @@
 
 # Cryptography Systems
 
-This project was inspired by code that was written for my cryptography class as way to apply the things I learned.
+This project was inspired by code that was written for my cryptography class as a way to apply the things I learned.
 The course itself was a math course, so we learned about the mathematical theory behind the systems such as 
 rings, groups, modular arithmetic, etc. The code written here is somewhat specialized to the systems
 we discussed in class and may have some variation from the "real" systems used in practice. 
@@ -366,7 +366,7 @@ key: (5,1)
 oac
 key: (5,2)
 gco
-key: (5,3)
+key: (5,3) <- was meant to be this one! 
 dog
 key: (5,4)
 bgd
