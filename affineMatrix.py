@@ -41,6 +41,14 @@ def textStringToMatrix(alphabet, string):
 
 
 def flippityFlopPart(matrix):
+    # the swaping part for finding the inverse of a 2 matrix
+    # if A is a 2x2 matrix  [[a, b],
+    #                        [c, d]]
+    # the inverse is 1/determinant  * flippedA
+    # where flippedA is [[d -b]
+    #                    [-c a]]
+    # this is what this function returns as an numpy array
+
     a = matrix[0][0]
     b = matrix[0][1]
     c = matrix[1][0]
@@ -90,4 +98,4 @@ def main():
                         print(numStringToText(alphabet, s))  # convert number matrix to string
 
 
-main()
+# main()
