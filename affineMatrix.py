@@ -41,6 +41,8 @@ def textStringToMatrix(alphabet, string):
 
 
 def flippityFlopPart(matrix):
+    # expects matrix to be a numpy array
+
     # the swaping part for finding the inverse of a 2 matrix
     # if A is a 2x2 matrix  [[a, b],
     #                        [c, d]]
@@ -48,6 +50,17 @@ def flippityFlopPart(matrix):
     # where flippedA is [[d -b]
     #                    [-c a]]
     # this is what this function returns as an numpy array
+
+    # make sure matrix is a numpy array
+    if not isinstance(matrix, np.ndarray):
+        # put error here
+        pass
+
+    # make sure the inputted matrix is 2x2
+    dimensions = matrix.shape  # should be (2,2)
+    if not dimensions == (2, 2):
+        # put error here
+        pass
 
     a = matrix[0][0]
     b = matrix[0][1]
