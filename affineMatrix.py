@@ -73,11 +73,16 @@ def buildKey(alphabet, a, b, c, d, e, f):
 
     if int(round(np.linalg.det(A))) == 0:
         # matrix is singular and is not a valid matrix since A needs to be invertable
-        raise UserWarning("%s is an invalid matrix for A. Needs to be invertable" % (str(A)))
+        raise UserWarning("\n%s is an invalid matrix for A. Needs to be invertable." % (str(A)))
     # make sure elements of B are  0 < element < z
     # really could be any number, but it is clearer to restrict it
-    if (B > 0).sum() != B.size or (B < z).sum() != B.size:
-        raise UserWarning("%s is an invalid matrix for B. Make sure all elements are greater than 0 and less than the length of the alphabet (%d)" % (str(B), z))
+    lessThan0 = (B >= 0).sum() != B.size
+    greaterThanZ = (B <= z).sum() != B.size
+    print(lessThan0)
+    print(greaterThanZ)
+    if lessThan0 or greaterThanZ:
+        raise UserWarning(
+            "\n%s is an invalid matrix for B. Make sure all elements are greater than or equal to 0 and less than or equal to the length of the alphabet (%d)" % (str(B), z))
 
     return (A, B)
 
