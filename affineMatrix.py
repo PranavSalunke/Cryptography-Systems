@@ -4,6 +4,21 @@ import numpy as np
 import miscTools
 
 
+def affineMatrixEncode(alphabet, P, key):
+    A = key[0]
+    B = key[1]
+    z = len(alphabet)
+    C = np.matmul(A, P)+B  # apply affine matrix transformation C = A*P+B
+    C = C % z
+    numstr = matrixToNumString(C)
+    s = numStringToText(alphabet, numstr)
+    return s
+
+
+def affineMatrixDecode(alphabet, C, A, B):
+    pass
+
+
 def matrixToNumString(matrix):
     # converts a matrix into a string of space separated numbers
     s = ""
@@ -47,6 +62,26 @@ def textStringToMatrix(alphabet, string):
     return np.array([top, bottom])
 
 
+def buildKey(alphabet, a, b, c, d, e, f):
+    # A is a 2x2 matrix  [[a, b],
+    #                     [c, d]]
+    # B is a 2x1 matrix  [[e],
+    #                     [f]]
+    z = len(alphabet)
+    A = np.array([[a, b], [c, d]])
+    B = np.array([[e], [f]])
+
+    if int(round(np.linalg.det(A))) == 0:
+        # matrix is singular and is not a valid matrix since A needs to be invertable
+        raise UserWarning("%s is an invalid matrix for A. Needs to be invertable" % (str(A)))
+    # make sure elements of B are  0 < element < z
+    # really could be any number, but it is clearer to restrict it
+    if (B > 0).sum() != B.size or (B < z).sum() != B.size:
+        raise UserWarning("%s is an invalid matrix for B. Make sure all elements are greater than 0 and less than the length of the alphabet (%d)" % (str(B), z))
+
+    return (A, B)
+
+
 def flippityFlopPart(matrix):
     # expects matrix to be a numpy array
 
@@ -88,11 +123,18 @@ def main():
     e2 = 0
     e3 = 0
     e4 = 0
-    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.?"
-    # from hw question 5.2
-    # text = "U?DIPPWKCKIKFBWZERRXTV AXN,FG.SAYCHYVTMIMBG.LHTV KCPEAF?.FSGGZ.YOQMZQL.DWKLHYCHIVT,REEKQMJSLEAFXWWVFMKQQUQEWOQHI .BOG.UN.JGNIZQYESRMOQGNWMTVZHF,OKQYZQBLVNQ.MJSLMKQQUQRXKMJEG.ZH WRM.HYNDV,REE,RGBJR.F?NFHMHGHSFMKTZPDKA?EVJEM W?T MDOYU.FSFYCKWSHKNGEG.LH?NFHMHGHSFOQCCESRM?N,RZBE,.HZZQLIHWWCZ.KHIIJOWIHW..HQQUQUNRMJR.F?TWANUEGSEGTSHFXWZGHDOOQGNVFMKWE,MBFE,.H,XOQWKZBOTRZON.ECJQLWZFXWZQQUQ.GMZCIG.VZKWV.Q.NXVTG.QQUQ.USFMKBOBFEM WYCHIVTJR.FJLVZGNMJSL?Z QIOWCESRMSFSWSEYRWK"
-    # from example 5.4
-    text = "CU.TG CGNFCG.?BK"
+    # alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.?"
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
+
+    text = "TOMORROW"
+    P = textStringToMatrix(alphabet, text)
+    key = buildKey(alphabet, 23, -1, 4, 12, 3, 19)
+    C = affineMatrixEncode(alphabet, P, key)
+    print(text)
+    print(P)
+    print(key[0])
+    print(key[1])
+    print(C)
 
     # for e1 in range(2):  # test all 16 cases
     #     for e2 in range(2):
