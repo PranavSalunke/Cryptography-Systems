@@ -5,6 +5,7 @@ import miscTools
 
 
 def matrixToNumString(matrix):
+    # converts a matrix into a string of space separated numbers
     s = ""
     for a, b in zip(matrix[0], matrix[1]):
         s += " "
@@ -16,6 +17,7 @@ def matrixToNumString(matrix):
 
 
 def numStringToText(alphabet, numstring):
+    # converts string of space separated numbers to its letter representation
     s = ""
     numarr = numstring.split()
     for n in numarr:
@@ -24,6 +26,9 @@ def numStringToText(alphabet, numstring):
 
 
 def textStringToMatrix(alphabet, string):
+    # converts a string to its 2xN matrix representation. (N depends on length of string)
+    #   Pads with space if needed to have a rectangular matrix
+    #   if there is no space, it pads with the last character in the alphabet
     top = []
     bottom = []
     for i in range(len(string)):
@@ -34,7 +39,9 @@ def textStringToMatrix(alphabet, string):
             bottom.append(n)
 
     if len(top) > len(bottom):
-        n = alphabet.find(" ")
+        n = alphabet.find(" ")  # bad with space
+        if n == -1:
+            n = len(alphabet)-1
         bottom.append(n)
 
     return np.array([top, bottom])
@@ -86,29 +93,28 @@ def main():
     # text = "U?DIPPWKCKIKFBWZERRXTV AXN,FG.SAYCHYVTMIMBG.LHTV KCPEAF?.FSGGZ.YOQMZQL.DWKLHYCHIVT,REEKQMJSLEAFXWWVFMKQQUQEWOQHI .BOG.UN.JGNIZQYESRMOQGNWMTVZHF,OKQYZQBLVNQ.MJSLMKQQUQRXKMJEG.ZH WRM.HYNDV,REE,RGBJR.F?NFHMHGHSFMKTZPDKA?EVJEM W?T MDOYU.FSFYCKWSHKNGEG.LH?NFHMHGHSFOQCCESRM?N,RZBE,.HZZQLIHWWCZ.KHIIJOWIHW..HQQUQUNRMJR.F?TWANUEGSEGTSHFXWZGHDOOQGNVFMKWE,MBFE,.H,XOQWKZBOTRZON.ECJQLWZFXWZQQUQ.GMZCIG.VZKWV.Q.NXVTG.QQUQ.USFMKBOBFEM WYCHIVTJR.FJLVZGNMJSL?Z QIOWCESRMSFSWSEYRWK"
     # from example 5.4
     text = "CU.TG CGNFCG.?BK"
-    C = textStringToMatrix(alphabet, text)
 
-    for e1 in range(2):  # test all 16 cases
-        for e2 in range(2):
-            for e3 in range(2):
-                for e4 in range(2):
-                    # get matrix A for that case
-                    # for text from hw question 5.2
-                    # A = np.array([[14 + (15 * e1), 5 + (15 * e2)], [3 + (15 * e3), 11 + (15 * e4)]])
-                    # from example 5.4
-                    A = np.array([[9 + (15 * e1), 1 + (15 * e2)], [13 + (15 * e3), 4 + (15 * e4)]])
+    # for e1 in range(2):  # test all 16 cases
+    #     for e2 in range(2):
+    #         for e3 in range(2):
+    #             for e4 in range(2):
+    #                 # get matrix A for that case
+    #                 # for text from hw question 5.2
+    #                 # A = np.array([[14 + (15 * e1), 5 + (15 * e2)], [3 + (15 * e3), 11 + (15 * e4)]])
+    #                 # from example 5.4
+    #                 A = np.array([[9 + (15 * e1), 1 + (15 * e2)], [13 + (15 * e3), 4 + (15 * e4)]])
 
-                    # get det A to see if it is invertable in mod 30 (30 is hard coded for now)
-                    det = int(round(np.linalg.det(A)))
-                    det = det % 30
-                    detinv = miscTools.modInverse(det, 30)
-                    if detinv is not None:
-                        print("%d %d %d %d" % (e1, e2, e3, e4))
-                        Achanged = flippityFlopPart(A)
-                        Ainv = (detinv * Achanged) % 30  # find A^-1
-                        P = (Ainv.dot(C)) % 30  # get matrix for plain text
-                        s = matrixToNumString(P)
-                        print(numStringToText(alphabet, s))  # convert number matrix to string
+    #                 # get det A to see if it is invertable in mod 30 (30 is hard coded for now)
+    #                 det = int(round(np.linalg.det(A)))
+    #                 det = det % 30
+    #                 detinv = miscTools.modInverse(det, 30)
+    #                 if detinv is not None:
+    #                     print("%d %d %d %d" % (e1, e2, e3, e4))
+    #                     Achanged = flippityFlopPart(A)
+    #                     Ainv = (detinv * Achanged) % 30  # find A^-1
+    #                     P = (Ainv.dot(C)) % 30  # get matrix for plain text
+    #                     s = matrixToNumString(P)
+    #                     print(numStringToText(alphabet, s))  # convert number matrix to string
 
 
-# main()
+main()
