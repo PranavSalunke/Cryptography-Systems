@@ -62,11 +62,18 @@ def textStringToMatrix(alphabet, string):
     return np.array([top, bottom])
 
 
-def buildKey(alphabet, a, b, c, d, e, f):
+def buildKey(alphabet, aMatrixElems, bMatrixElems):
+    # aMatrix is a tuple (a,b,c,d)
+    # bMatrix is a tuple (e,f)
+
     # A is a 2x2 matrix  [[a, b],
     #                     [c, d]]
     # B is a 2x1 matrix  [[e],
     #                     [f]]
+
+    a, b, c, d = aMatrixElems
+    e, f = bMatrixElems
+
     z = len(alphabet)
     A = np.array([[a, b], [c, d]])
     B = np.array([[e], [f]])
@@ -74,12 +81,12 @@ def buildKey(alphabet, a, b, c, d, e, f):
     if int(round(np.linalg.det(A))) == 0:
         # matrix is singular and is not a valid matrix since A needs to be invertable
         raise UserWarning("\n%s is an invalid matrix for A. Needs to be invertable." % (str(A)))
+
     # make sure elements of B are  0 < element < z
     # really could be any number, but it is clearer to restrict it
     lessThan0 = (B >= 0).sum() != B.size
     greaterThanZ = (B <= z).sum() != B.size
-    print(lessThan0)
-    print(greaterThanZ)
+
     if lessThan0 or greaterThanZ:
         raise UserWarning(
             "\n%s is an invalid matrix for B. Make sure all elements are greater than or equal to 0 and less than or equal to the length of the alphabet (%d)" % (str(B), z))
@@ -133,7 +140,7 @@ def main():
 
     text = "TOMORROW"
     P = textStringToMatrix(alphabet, text)
-    key = buildKey(alphabet, 23, -1, 4, 12, 3, 19)
+    key = buildKey(alphabet, (23, -1, 4, 12), (3, 19))
     C = affineMatrixEncode(alphabet, P, key)
     print(text)
     print(P)
