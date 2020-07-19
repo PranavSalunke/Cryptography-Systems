@@ -167,7 +167,7 @@ def main():
         print("Encoding the string: \"%s\"" % (text))
         print("The encoded string: \"%s\"" % (encoded))
         print("Now you can send this encrypted message to your friend!")
-    elif mode == "decode" or mode == "e":
+    elif mode == "decode" or mode == "d":
         key = args.key
         validateKey(key, len(alph))
         text = args.encodedtext
